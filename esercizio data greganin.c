@@ -10,9 +10,9 @@ do
     scanf("%d",&data);
    
 
-    int giorno = valore / 1000000;
-    int mese = valore / 10000 - giorno * 100;
-    int anno = valore - mese * 10000 - giorno * 1000000;
+    int giorno = data / 1000000;
+    int mese = data / 10000 - giorno * 100;
+    int anno = data%10000;
 
     if (giorno <= 31)
     {
