@@ -42,7 +42,9 @@ do
     }
 }while(data!="");
 
-printf("la data è: %d", valore); 
+printf("il giorno è:%d\n",giorno); 
+printf("il mese è:%d\n",mese); 
+printf("il anno è:%d\n",anno); 
 
 return 0;
 }
