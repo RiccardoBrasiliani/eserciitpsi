@@ -2,13 +2,13 @@
 #include <string.h>
 int main(int argc, char*argv[]);
 {
-    string data; 
-    int valore, 
+    int data; 
+     
 do
 {
     printf("scrivi una data\n");
-    scanf("%s",&data);
-    valore= atoi(data); 
+    scanf("%d",&data);
+   
 
     int giorno = valore / 1000000;
     int mese = valore / 10000 - giorno * 100;
