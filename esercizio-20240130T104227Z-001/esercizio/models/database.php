@@ -1,37 +1,30 @@
 <?php
 
-class connect
+class Database
 {
-    private static $host;
-    private static $database;
-    private static $username;
-    private static $password;
-    private static $pdo;
+    static private $connection;
+    static private $dsn = "mysql:host=localhost;dbname=parole";
 
-    public static function get_pdo()
-    {
-        return self::$pdo;
-    }
-
-    public static function inizialize($host,$database,$username,$password)
-    {
-        self::$host=$host;
-        self::$database=$database;
-        self::$username=$username;
-        self::$password=$password;
-        self::connect();
-    }
-    public static function connect()
+    public static function get_Connection()
+{
+    if(!isset($connection))
     {
         try {
-            //Data Source Name, contiene info necessarie per conettersi al database
-            $dsn = "mysql:host=" . self::$host . ";dbname=" . self::$database;
-            self::$pdo = new PDO($dsn, self::$username, self::$password);
-            //imposto attributi gestione errori ed eccezioni
-            self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //echo "Connessione avvenuta con successo";
-        } catch (PDOException $e) {
-            die("Errore di connessione al database: " . $e->getMessage());
+            $loginData = file_get_contents(__DIR__ . "\config.txt");
+            $loginDataSplit = explode(":", $loginData);
+            $connection = new PDO(self::$dsn, $loginDataSplit[0], $loginDataSplit[1]);
+            self::$connection = $connection;
+            return self::$connection;
+        }
+        catch (PDOException $e)
+        {
+            echo "Database connection error: " . $e->getMessage();
+            return false;
         }
     }
+    else
+    {
+        return self::$connection;
+    }
+}
 }
